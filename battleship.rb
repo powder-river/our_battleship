@@ -18,7 +18,7 @@ class Ship
          @coverage << [column + num, row]
        end
      else
-       @length.time do |num|
+       @length.times do |num|
          @coverage << [column, row + num]
        end
      end
