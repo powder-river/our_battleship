@@ -8,26 +8,22 @@ class Ship
   attr_reader :length, :coverage
   def initialize (length = 4)
     @length = length
+    @placed = false
   end
 
   def place (column , row , across)
     column > 0 && row > 0
-    @coverage = [[0,0],[-1,-1]]
-    @coverage.each do |point|
-      if point[0] == column && point [1] == row
-         return false
+    if @placed == true
+      return false
+    end
+    @coverage = []
 
 
-       end
-      end
-
-
-
-     if across == true
-       @length.times do |num|
-         @coverage << [column + num, row]
-       end
-     else
+   if across == true
+     @length.times do |num|
+     @coverage << [column + num, row]
+     end
+   else
        @length.times do |num|
          @coverage << [column, row + num]
        end
@@ -35,7 +31,7 @@ class Ship
 
      @start_x = column
      @start_y = row
-
+    @placed = true
   end
 
 
@@ -51,3 +47,14 @@ end
 #F: 6, G: 7, H: 8, J: 9,}
 
 #gameboard = ShipCoverage.new (game_hash)
+
+
+
+
+#  @coverage.each do |point|
+#    if point[0] == column && point [1] == row
+#       return false
+#
+#
+#     end
+#    end
