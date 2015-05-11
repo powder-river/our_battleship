@@ -12,11 +12,25 @@ class Ship
 
   def place (column , row , across)
      column > 0 && row > 0
+     @coverage = []
+     if across == true
+       @length.times do |num|
+         @coverage << [column + num, row]
+       end
+     else
+       @length.time do |num|
+         @coverage << [column, row + num]
+       end
+     end
+
+     @start_x = column
+     @start_y = row
 
   end
 
 
   def covers? (column, row)
+    @coverage.include? [column,row]
 
 
   end
