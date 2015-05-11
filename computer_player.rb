@@ -1,2 +1,3 @@
-class ComputerPlayer
+require "./player.rb"
+class ComputerPlayer < Player
 end
