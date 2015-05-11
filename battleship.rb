@@ -59,6 +59,13 @@ class Ship
     end
   end
 
+  def fire_at (column, row)
+    @coverage.include? [column,row]
+  end
+
+  def sunk? 
+  end
+
 end
 
 #game_hash = { A: 1, B: 2, C: 3, D: 4, E: 5,
