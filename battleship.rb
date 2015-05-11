@@ -8,4 +8,8 @@ class Ship
   def initialize (length = 4)
     @length = length
   end
+
+  def place (placement_1, placement_2, to_be_continued)
+
+  end
 end
