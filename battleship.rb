@@ -9,6 +9,8 @@ class Ship
   def initialize (length = 4)
     @length = length
     @placed = false
+    @coverage = []
+    @shots = []
   end
 
   def place (column , row , across)
@@ -16,7 +18,7 @@ class Ship
     if @placed == true
       return false
     end
-    @coverage = []
+
 
 
     @coverage.each do |point|
@@ -60,10 +62,21 @@ class Ship
   end
 
   def fire_at (column, row)
-    @coverage.include? [column,row]
+    if  @coverage.include? [column,row]
+      @shots << [column,row]
+      return true
+    else
+      return false
+    end
+
   end
 
-  def sunk? 
+  def sunk?
+    if @coverage == @shots
+      return true
+    else
+      return false
+    end
   end
 
 end
