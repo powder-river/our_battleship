@@ -19,6 +19,15 @@ class Ship
     @coverage = []
 
 
+    @coverage.each do |point|
+      if point[0] == column && point [1] == row
+         return false
+
+
+       end
+      end
+
+
    if across == true
      @length.times do |num|
      @coverage << [column + num, row]
@@ -37,8 +46,17 @@ class Ship
 
   def covers? (column, row)
     @coverage.include? [column,row]
+  end
 
+  def overlaps_with?(other_ship)
+    other_ship.coverage.each do |point|
 
+      if self.covers?(point[0],point[1])
+        return true
+      else
+        return false
+      end
+    end
   end
 
 end
@@ -47,14 +65,3 @@ end
 #F: 6, G: 7, H: 8, J: 9,}
 
 #gameboard = ShipCoverage.new (game_hash)
-
-
-
-
-#  @coverage.each do |point|
-#    if point[0] == column && point [1] == row
-#       return false
-#
-#
-#     end
-#    end
