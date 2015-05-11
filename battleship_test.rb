@@ -6,6 +6,7 @@ require './computer_player.rb'
 #Note: This line is going to fail first.
 require './battleship.rb'
 
+
 $mock_inputs = []
 def get_user_input
   $mock_inputs.shift
