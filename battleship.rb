@@ -5,20 +5,30 @@ require './computer_player.rb'
 require './ship_coverage'
 
 class Ship
-  attr_reader :length
+  attr_reader :length, :coverage
   def initialize (length = 4)
     @length = length
   end
 
   def place (column , row , across)
-     column > 0 && row > 0
-     @coverage = []
+    column > 0 && row > 0
+    @coverage = [[0,0],[-1,-1]]
+    @coverage.each do |point|
+      if point[0] == column && point [1] == row
+         return false
+
+
+       end
+      end
+
+
+
      if across == true
        @length.times do |num|
          @coverage << [column + num, row]
        end
      else
-       @length.time do |num|
+       @length.times do |num|
          @coverage << [column, row + num]
        end
      end
