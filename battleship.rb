@@ -10,6 +10,6 @@ class Ship
   end
 
   def place (placement_1, placement_2, to_be_continued)
-
+    return true
   end
 end
