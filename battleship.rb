@@ -8,11 +8,19 @@ class Ship
   attr_reader :length, :coverage
   def initialize (length = 4)
     @length = length
+    @placed = false
+    @coverage = []
+    @shots = []
   end
 
   def place (column , row , across)
     column > 0 && row > 0
-    @coverage = [[0,0],[-1,-1]]
+    if @placed == true
+      return false
+    end
+
+
+
     @coverage.each do |point|
       if point[0] == column && point [1] == row
          return false
@@ -22,12 +30,11 @@ class Ship
       end
 
 
-
-     if across == true
-       @length.times do |num|
-         @coverage << [column + num, row]
-       end
-     else
+   if across == true
+     @length.times do |num|
+     @coverage << [column + num, row]
+     end
+   else
        @length.times do |num|
          @coverage << [column, row + num]
        end
@@ -35,14 +42,41 @@ class Ship
 
      @start_x = column
      @start_y = row
-
+    @placed = true
   end
 
 
   def covers? (column, row)
     @coverage.include? [column,row]
+  end
 
+  def overlaps_with?(other_ship)
+    other_ship.coverage.each do |point|
 
+      if self.covers?(point[0],point[1])
+        return true
+      else
+        return false
+      end
+    end
+  end
+
+  def fire_at (column, row)
+    if  @coverage.include? [column,row]
+      @shots << [column,row]
+      return true
+    else
+      return false
+    end
+
+  end
+
+  def sunk?
+    if @coverage == @shots
+      return true
+    else
+      return false
+    end
   end
 
 end
