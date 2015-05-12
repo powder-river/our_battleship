@@ -7,6 +7,9 @@ class Grid
   def initialize
     @holes = []
     @salvos = []
+    @game_hash = { A: 1, B: 2, C: 3, D: 4, E: 5,
+    F: 6, G: 7, H: 8, I: 9, J: 10}
+
   end
 
   def has_ship_on?(column,row)
@@ -20,8 +23,6 @@ puts %Q{    1   2   3   4   5   6   7   8   9   10
 
 
     10.times do |i|
-      game_hash = { A: 1, B: 2, C: 3, D: 4, E: 5,
-      F: 6, G: 7, H: 8, I: 9, J: 10}
       output = ""
       row = i + 1
       10.times do |j|
@@ -52,7 +53,7 @@ puts %Q{    1   2   3   4   5   6   7   8   9   10
           output << "|   "
         end
       end
-      puts game_hash.key(row).to_s + " " + output  + "|"
+      puts @game_hash.key(row).to_s + " " + output  + "|"
     end
     puts "  -----------------------------------------"
 
@@ -90,6 +91,17 @@ puts %Q{    1   2   3   4   5   6   7   8   9   10
     else
       return false
     end
+  end
+
+  def x_of(coords)
+    coordinates = coords.split(//)
+    if coordinates[2]
+    #  byebug
+      return (coordinates[1] + coordinates[2]).to_i
+    else
+    return coordinates[1].to_i
+    end
+
   end
 
 end
