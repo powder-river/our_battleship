@@ -3,15 +3,18 @@ require './player.rb'
 require './human_player.rb'
 require './computer_player.rb'
 require './ship_coverage'
+require './grid.rb'
+#require './hole.rb'
 
 class Ship
-  attr_reader :length, :coverage
+  attr_reader :length, :coverage, :shots
   def initialize (length = 4)
     @length = length
     @placed = false
     @coverage = []
     @shots = []
   end
+  #god_help_us = Hole.new(@coverage ,@shots)
 
   def place (column , row , across)
     column > 0 && row > 0
@@ -20,14 +23,11 @@ class Ship
     end
 
 
-
-    @coverage.each do |point|
-      if point[0] == column && point [1] == row
-         return false
-
-
-       end
-      end
+    # @coverage.each do |point|
+    #   if point[0] == column && point [1] == row
+    #      return false
+    #    end
+    #   end
 
 
    if across == true
@@ -40,8 +40,8 @@ class Ship
        end
      end
 
-     @start_x = column
-     @start_y = row
+    #@start_x = column
+    # @start_y = row
     @placed = true
   end
 
@@ -62,7 +62,7 @@ class Ship
   end
 
   def fire_at (column, row)
-    if  @coverage.include? [column,row]
+    if @coverage.include? [column,row]
       @shots << [column,row]
       return true
     else
@@ -72,14 +72,18 @@ class Ship
   end
 
   def sunk?
-    if @coverage == @shots
+    if @coverage == @shots && @placed == true
       return true
     else
       return false
     end
   end
 
+
+
+
 end
+
 
 #game_hash = { A: 1, B: 2, C: 3, D: 4, E: 5,
 #F: 6, G: 7, H: 8, J: 9,}
