@@ -29,14 +29,24 @@ puts %Q{    1   2   3   4   5   6   7   8   9   10
         fill = []
         @holes.each do |k|
           if k == [column,row]
-            fill << true
+            fill << "O"
           else
             fill << false
           end
 
 
         end
-        if fill.include?(true)
+        @salvos.each do |l|
+          if l == [column,row]
+            fill << "X"
+          else
+            fill << false
+          end
+        end
+
+        if fill.include?("X")
+          output << "| X "
+        elsif fill.include?("O")
           output << "| O "
         else
           output << "|   "
@@ -72,6 +82,14 @@ puts %Q{    1   2   3   4   5   6   7   8   9   10
       return false
     end
 
+  end
+
+  def sunk?
+    if @holes == @salvos && @holes != []
+      return true
+    else
+      return false
+    end
   end
 
 end
