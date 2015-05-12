@@ -1,3 +1,6 @@
+require 'byebug'
+require './battleship.rb'
+
 class Grid
   attr_reader :display
   def initialize
@@ -31,9 +34,14 @@ J |   |   |   |   |   |   |   |   |   |   |
 
   def place_ship(ship, column, row, across)
     ship.place(column,row, across)
-    ship.coverage.each do |i|
-      @holes << i
+      @holes.each do |hole|
+      if ship.coverage.include?([hole[0], hole[1]])
+        return false
+      end
     end
-
+      ship.coverage.each do |i|
+        @holes << i
+          #byebug
+      end
   end
 end
