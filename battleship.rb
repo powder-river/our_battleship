@@ -14,42 +14,35 @@ class Ship
     @shots = []
   end
 
-  def place (column , row , across)
-    column > 0 && row > 0
+  def place (column,row,across)
     if @placed == true
       return false
     end
 
 
-
     # @coverage.each do |hole|
     #   if hole.location[0] == column && hole.location[1] == row
     #      return false
-    #
-    #
-    #    end
     #   end
-
-
-   if across == true
-     @length.times do |num|
-     @coverage << Hole.new(column + num, row)
-     end
-   else
-       @length.times do |num|
-         @coverage << Hole.new(column, row + num)
-       end
-     end
-
-     @start_x = column
-     @start_y = row
+    # end
+    # @placed = true
+    if across == true
+      @length.times do |num|
+        @coverage << Hole.new(column + num, row)
+      end
+    else
+      @length.times do |num|
+        @coverage << Hole.new(column, row + num)
+      end
+    end
     @placed = true
   end
 
 
   def covers? (column, row)
-    @coverage.each do |hole|
-      if hole.location == [column, row]
+    #@coverage.include? Hole.new(column,row)
+    @coverage.each do |i|
+      if i.location[0] == column && i.location[1] == row
         return true
       else
         return false
@@ -70,8 +63,9 @@ class Ship
 
   def fire_at (column, row)
     @coverage.each do |hole|
-      if hole.location == [column, row]
+      if hole.location = [column, row]
         hole.hit = true
+        return true
       else
         return false
       end
@@ -79,12 +73,13 @@ class Ship
   end
 
   def sunk?
-    if @coverage.each.location == @shots
+    if @coverage == @shots
       return true
     else
       return false
     end
   end
+
 
 end
 

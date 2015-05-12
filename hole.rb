@@ -1,8 +1,7 @@
 class Hole
-  attr_reader :location, :hit
-  def initialize (column, row)
-    @location = [column,row]
-    @hit = false
+  attr_accessor :location, :hit
+  def initialize (x,y)
+    @location = [x,y]
+    @hits = false
   end
-
 end
