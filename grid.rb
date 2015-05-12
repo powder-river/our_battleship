@@ -1,11 +1,12 @@
 require 'byebug'
 require './battleship.rb'
 
-class Grid < Ship
+class Grid
 
   attr_reader :display
   def initialize
     @holes = []
+    @salvos = []
   end
 
   def has_ship_on?(column,row)
@@ -63,6 +64,14 @@ puts %Q{    1   2   3   4   5   6   7   8   9   10
       end
   end
 
+  def fire_at(column, row)
+    if @holes.include?([column,row]) && !@salvos.include?([column, row])
+      @salvos << [column,row]
+      return true
+    else
+      return false
+    end
 
+  end
 
 end
