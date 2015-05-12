@@ -104,4 +104,12 @@ puts %Q{    1   2   3   4   5   6   7   8   9   10
 
   end
 
+  def y_of(coords)
+
+    coordinates = coords.split(//)
+    #byebug
+    return @game_hash[coordinates[0].to_sym]
+  end
+
+
 end
