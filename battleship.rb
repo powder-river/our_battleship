@@ -3,6 +3,7 @@ require './player.rb'
 require './human_player.rb'
 require './computer_player.rb'
 require './ship_coverage'
+require './hole.rb'
 
 class Ship
   attr_reader :length, :coverage
@@ -21,22 +22,22 @@ class Ship
 
 
 
-    @coverage.each do |point|
-      if point[0] == column && point [1] == row
-         return false
-
-
-       end
-      end
+    # @coverage.each do |hole|
+    #   if hole.location[0] == column && hole.location[1] == row
+    #      return false
+    #
+    #
+    #    end
+    #   end
 
 
    if across == true
      @length.times do |num|
-     @coverage << [column + num, row]
+     @coverage << Hole.new(column + num, row)
      end
    else
        @length.times do |num|
-         @coverage << [column, row + num]
+         @coverage << Hole.new(column, row + num)
        end
      end
 
@@ -47,13 +48,19 @@ class Ship
 
 
   def covers? (column, row)
-    @coverage.include? [column,row]
+    @coverage.each do |hole|
+      if hole.location == [column, row]
+        return true
+      else
+        return false
+      end
+    end
   end
 
   def overlaps_with?(other_ship)
-    other_ship.coverage.each do |point|
+    other_ship.coverage.each do |hole|
 
-      if self.covers?(point[0],point[1])
+      if self.covers?(hole.location[0],hole.location[1])
         return true
       else
         return false
@@ -62,17 +69,17 @@ class Ship
   end
 
   def fire_at (column, row)
-    if  @coverage.include? [column,row]
-      @shots << [column,row]
-      return true
-    else
-      return false
+    @coverage.each do |hole|
+      if hole.location == [column, row]
+        hole.hit = true
+      else
+        return false
+      end
     end
-
   end
 
   def sunk?
-    if @coverage == @shots
+    if @coverage.each.location == @shots
       return true
     else
       return false
