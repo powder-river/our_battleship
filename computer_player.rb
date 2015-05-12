@@ -1,8 +1,10 @@
 require "./player.rb"
 class ComputerPlayer < Player
 
-  attr_reader :name
-  def name
-    @name = "HAL 9000"
-  end
+  attr_reader :grid, :name
+  def initialize
+
+   @name = "HAL 9000"
+   @grid = Grid.new
+ end
 end
