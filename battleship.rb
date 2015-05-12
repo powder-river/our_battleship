@@ -61,7 +61,7 @@ class Ship
     end
   end
 
-  def fire_at (column, row)
+  def fire_at(column, row)
     if @coverage.include? [column,row]
       @shots << [column,row]
       return true
@@ -85,7 +85,6 @@ class Ship
 end
 
 
-#game_hash = { A: 1, B: 2, C: 3, D: 4, E: 5,
-#F: 6, G: 7, H: 8, J: 9,}
+
 
 #gameboard = ShipCoverage.new (game_hash)

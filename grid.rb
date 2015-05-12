@@ -1,7 +1,8 @@
 require 'byebug'
 require './battleship.rb'
 
-class Grid
+class Grid < Ship
+
   attr_reader :display
   def initialize
     @holes = []
@@ -61,4 +62,7 @@ puts %Q{    1   2   3   4   5   6   7   8   9   10
           #byebug
       end
   end
+
+
+
 end
