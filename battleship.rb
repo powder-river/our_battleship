@@ -2,12 +2,11 @@
 # require './player.rb'
 # require './human_player.rb'
 # require './computer_player.rb'
-require './ship_coverage'
 require './grid.rb'
 #require './hole.rb'
 
 class Ship
-  attr_reader :length, :coverage, :shots
+  attr_accessor :length, :coverage, :shots
   def initialize (length = 4)
     @length = length
     @placed = false
