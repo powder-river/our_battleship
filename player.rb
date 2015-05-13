@@ -5,8 +5,7 @@ require './grid.rb'
 class Player
   attr_reader :grid, :name, :ships
 
- def initialize (name = "Dave")
-   @name = name
+ def initialize
    @grid = Grid.new
    @ships = []
  end
