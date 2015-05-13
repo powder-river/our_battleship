@@ -3,7 +3,7 @@ require './battleship.rb'
 
 class Grid
 
-  attr_reader :display
+  attr_reader :display, :holes, :salvos
   def initialize
     @holes = []
     @salvos = []
@@ -64,15 +64,14 @@ puts %Q{    1   2   3   4   5   6   7   8   9   10
 
   def place_ship(ship, column, row, across)
     ship.place(column,row, across)
-      @holes.each do |hole|
+    @holes.each do |hole|
       if ship.coverage.include?([hole[0], hole[1]])
         return false
       end
     end
-      ship.coverage.each do |i|
-        @holes << i
-          #byebug
-      end
+    ship.coverage.each do |i|
+      @holes << i
+    end
   end
 
   def fire_at(column, row)
@@ -96,7 +95,6 @@ puts %Q{    1   2   3   4   5   6   7   8   9   10
   def x_of(coords)
     coordinates = coords.split(//)
     if coordinates[2]
-    #  byebug
       return (coordinates[1] + coordinates[2]).to_i
     else
     return coordinates[1].to_i
@@ -107,7 +105,6 @@ puts %Q{    1   2   3   4   5   6   7   8   9   10
   def y_of(coords)
 
     coordinates = coords.split(//)
-    #byebug
     return @game_hash[coordinates[0].to_sym]
   end
 

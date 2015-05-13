@@ -13,7 +13,7 @@ class Ship
     @coverage = []
     @shots = []
   end
-  #god_help_us = Hole.new(@coverage ,@shots)
+
 
   def place (column , row , across)
     column > 0 && row > 0
@@ -21,23 +21,15 @@ class Ship
       return false
     end
 
-
-    # @coverage.each do |point|
-    #   if point[0] == column && point [1] == row
-    #      return false
-    #    end
-    #   end
-
-
-   if across == true
+    if across == true
      @length.times do |num|
-     @coverage << [column + num, row]
-     end
-   else
+       @coverage << [column + num, row]
+       end
+    else
        @length.times do |num|
          @coverage << [column, row + num]
        end
-     end
+    end
 
     #@start_x = column
     # @start_y = row
@@ -50,14 +42,7 @@ class Ship
   end
 
   def overlaps_with?(other_ship)
-    other_ship.coverage.each do |point|
-
-      if self.covers?(point[0],point[1])
-        return true
-      else
-        return false
-      end
-    end
+    @coverage.any?{|s| other_ship.covers?(s[0], s[1])}
   end
 
   def fire_at(column, row)
@@ -77,6 +62,7 @@ class Ship
       return false
     end
   end
+
 
 
 

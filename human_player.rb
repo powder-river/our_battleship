@@ -11,6 +11,7 @@ class HumanPlayer < Player
     @name = name
     @grid = Grid.new
     @ships = []
+
   end
 
 
